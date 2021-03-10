@@ -1,6 +1,6 @@
 {
   "name": "@dhub/migration-tool",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "A tool for migrating from dDrive daemon to dHub.",
   "main": "index.js",
   "bin": {

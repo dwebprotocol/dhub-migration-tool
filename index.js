@@ -6,7 +6,7 @@ const level = require('level')
 const sub = require('subleveldown')
 const bjson = require('buffer-json-encoding')
 const collectStream = require('stream-collector')
-const { Client: DHubClient, Server: DHubServer } = require('hyperspace')
+const { Client: DHubClient, Server: DHubServer } = require('dhub')
 
 const DHUB_ROOT = p.join(os.homedir(), '.dhub')
 const DHUB_STORAGE_DIR = p.join(DHUB_ROOT, 'storage')
@@ -14,10 +14,10 @@ const DHUB_CONFIG_DIR = p.join(DHUB_ROOT, 'config')
 
 const FUSE_CONFIG_PATH = p.join(DHUB_CONFIG_DIR, 'fuse.json')
 
-const DAEMON_ROOT = p.join(os.homedir(), '.hyperdrive')
+const DAEMON_ROOT = p.join(os.homedir(), '.ddrive')
 const DAEMON_STORAGE_DIR = p.join(DAEMON_ROOT, 'storage')
 const DAEMON_DB_PATH = p.join(DAEMON_STORAGE_DIR, 'db')
-const DAEMON_BASES_PATH = p.join(DAEMON_STORAGE_DIR, 'cores')
+const DAEMON_BASES_PATH = p.join(DAEMON_STORAGE_DIR, 'bases')
 
 const MIGRATION_DIR = p.join(DAEMON_STORAGE_DIR, '.migration')
 
@@ -36,7 +36,7 @@ async function migrate (opts = {}) {
     await migrateBases()
   }
 
-  // Start the Hyperspace server on the migration directory.
+  // Start the dHub server on the migration directory.
   const server = new DHubServer({
     storage: opts.noMove ? DAEMON_BASES_PATH : MIGRATION_DIR,
     noAnnounce: true
@@ -51,7 +51,7 @@ async function migrate (opts = {}) {
   // Migrate the root FUSE drives into a @dhub/ddrive config file.
   await migrateRootDrive(fuseDb)
 
-  // Shut down the Hyperspace server.
+  // Shut down the dHub server.
   await server.close()
 
   // Atomically rename the migration directory to .dhub.

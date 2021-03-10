@@ -1,5 +1,5 @@
 # `@dhub/migration-tool`
-A tool for migrating from the [dDrive Daemon](https://github.com) to [dHub](https://github.com/-org/hyperspace).
+A tool for migrating from the [dDrive Daemon](https://github.com) to [dHub](https://github.com/-org/dhub).
 
 This tool does a few things:
 1. It moves all your stored dDatabases from `~/.ddrives/storage/vaults` to `~/.dhub/storage`.
